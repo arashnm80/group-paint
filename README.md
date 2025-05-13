@@ -1,6 +1,8 @@
 # group-paint
 paint at the same time on the screen from multiple devices
 
+![image](https://github.com/user-attachments/assets/cc5737a1-c026-49f7-8a04-df368adf52d9)
+
 ## how to install
 Install dependencies:
 ```
