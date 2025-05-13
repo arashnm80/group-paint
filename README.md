@@ -1,4 +1,5 @@
 # group-paint
+paint at the same time on the screen from multiple devices
 
 ## how to install
 Install dependencies:

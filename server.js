@@ -6,16 +6,25 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-let sharedText = ''; // Shared state
+// Store drawing history
+let drawingHistory = [];
 
 app.use(express.static('public'));
 
 io.on('connection', (socket) => {
-    socket.emit('init', sharedText);
+    // Send existing drawing history to new clients
+    socket.emit('drawingHistory', drawingHistory);
 
-    socket.on('textUpdate', (newText) => {
-        sharedText = newText;
-        socket.broadcast.emit('textUpdate', newText);
+    // Handle new drawing events
+    socket.on('draw', (drawData) => {
+        drawingHistory.push(drawData);
+        socket.broadcast.emit('draw', drawData);
+    });
+
+    // Handle canvas clear event
+    socket.on('clearCanvas', () => {
+        drawingHistory = [];
+        socket.broadcast.emit('clearCanvas');
     });
 });
 
